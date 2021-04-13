@@ -1,16 +1,17 @@
 **##java基础知识**
 
 ###一、string 和 stringbuffer 和stringBuilder
-	1.操作数量较少的字符串用String，不可修改的字符串；
-	2.在单线程且操作大量字符串用StringBuilder,速度快，但线程不安全，可修改；
-	3.在多线程且操作大量字符串用StringBuffer，线程安全，可修改。
-	两个字符串相加，原理是调用stringbuilder进行处理的。
-	扩容为二倍+2
-###二、数组 (Array) 和列表 (ArrayList) 的区别
-	Array可以包含基本类型和对象类型，ArrayList只能包含对象类型。
-	Array大小是固定的，ArrayList的大小是动态变化的。
-ArrayList提供了更多的方法和特性，比如：addAll()，removeAll()，iterator()等等。![image](https://user-images.githubusercontent.com/30047055/114485717-ffe47600-9c3e-11eb-949c-90eee544faca.png)
 
+1.操作数量较少的字符串用String，不可修改的字符串；
+2.在单线程且操作大量字符串用StringBuilder,速度快，但线程不安全，可修改；
+3.在多线程且操作大量字符串用StringBuffer，线程安全，可修改。
+两个字符串相加，原理是调用stringbuilder进行处理的。
+扩容为二倍+2
+###二、数组 (Array) 和列表 (ArrayList) 的区别
+
+Array可以包含基本类型和对象类型，ArrayList只能包含对象类型。
+Array大小是固定的，ArrayList的大小是动态变化的。
+ArrayList提供了更多的方法和特性，比如：addAll()，removeAll()，iterator()等等。
 
 
 
