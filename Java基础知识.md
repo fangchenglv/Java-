@@ -17,7 +17,7 @@
 	引用类型：比较的就是地址值是否相同
 	equals 的作用:
 	引用类型：默认情况下，比较的是地址值，重写该方法后比较对象的成员变量值是否相同
-'''
+、、、
 	public static void main(String[] args) {
 	    Integer a = new Integer(3);
 	    Integer b = 3;                 
@@ -25,14 +25,12 @@
 	    System.out.println(a == b);    
 	    System.out.println(a == c);    
 	}
- '''
+、、、
 	a == b分析
 	Integer b = 3; 自动调用Integer.valueOf(3) 返回一个Integer的对象。 这个对象是存放到cache中的。 而 Integer a = new Integer(3);这里创建了一个新的对象Integer
 	 所以 a == b 返回的是false
-	
 	a == c 分析
 	一个Integer 与 int比较，先将Integer转换成int类型，再做值比较，所以返回的是true。
-	
 	java中还有与Integer类似的是Long，它也有一个缓存，在区间[-128,127]范围内获取缓存的值，而Long与long比较的时候先转换成long类型再做值的比
 	较。Double类型，它没有缓存，但是当Double与double比较的时候会先转换成double类型，再做值的比较
 
