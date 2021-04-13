@@ -60,9 +60,9 @@ HashMap中，如果要比较key是否相等，要同时使用这两个函数！�
 HashMap中的比较key是这样的，先求出key的hashcode(),比较其值是否相等，若相等再比较equals(),若相等则认为他们是相等的。若equals()不相等则认为他们不相等。如果只重写hashcode()不重写equals()方法，当比较equals()时只是看他们是否为同一对象（即进行内存地址的比较）,所以必定要两个方法一起重写。HashMap用来判断key是否相等的方法，其实是调用了HashSet判断加入元素 是否相等。重载hashCode()是为了对同一个key，能得到相同的Hash Code，这样HashMap就可以定位到我们指定的key上。重载equals()是为了向HashMap表明当前对象和key上所保存的对象是相等的，这样我们才真正地获得了这个key所对应的这个键值对。
 
 ### Java中Iterator用法整理
-使用next()获得序列中的下一个元素。 
-使用hasNext()检查序列中是否还有元素。  
-使用remove()将迭代器新返回的元素删除。  
+使用next()获得序列中的下一个元素。  
+使用hasNext()检查序列中是否还有元素。    
+使用remove()将迭代器新返回的元素删除。    
 
 ### HashMap如果我想要让自己的Object作为K应该怎么办
 
@@ -70,9 +70,9 @@ HashMap中的比较key是这样的，先求出key的hashcode(),比较其值是�
 2. 重写equals()方法，需要遵守自反性、对称性、传递性、一致性以及对于任何非null的引用值x，x.equals(null)必须返回false的这几个特性，目的是为了保证key在哈希表中的唯一性（Java建议重写equal方法的时候需重写hashcode的方法）
 
 ### 多态的必要条件
-重写   
-重载  
-父类引用指向子类对象：先调用子类方法，super调用父类方法  
+1. 重写   
+2. 重载  
+3. 父类引用指向子类对象：先调用子类方法，super调用父类方法  
 向上转型  
 Person p = new student();  
 方法先找子类再找父类，属性静态绑定  是父类。  
@@ -85,9 +85,9 @@ Person p = new student();
 包装类实现了comparable接口，可自定义比较方法，重写compareTo()  
 2. Comparator  
 重写compare  
-1.Comparable的compareTo(T)方法只有1个参数.  
-2.Comparator接口的compare(T o1, T o2)方法有两个参数, 有@FunctionalInterface接口,所以有Lambda表达式的用法.Comparable只能在类内部实现比较功能,让想让实现比较功能的类自身实现Comparable接口  
-Comparator可以做成比较器类,让比较器类实现Comparator接口.  
+1. Comparable的compareTo(T)方法只有1个参数.  
+2. Comparator接口的compare(T o1, T o2)方法有两个参数, 有@FunctionalInterface接口,所以有Lambda表达式的用法.Comparable只能在类内部实现比较功能,让想让实现比较功能的类自身实现Comparable接口  
+3. Comparator可以做成比较器类,让比较器类实现Comparator接口.  
 
 
 ### volatile
