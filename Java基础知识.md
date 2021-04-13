@@ -12,6 +12,7 @@ char：16位，存储Unicode码，用单引号赋值。
 ### Boolean占几个字节
 未精确定义字节。Java语言表达式所操作的boolean值，在编译之后都使用Java虚拟机中的int数据类型来代替，而boolean数组将会被编码成Java虚拟机的byte数组，每个元素boolean元素占8位。
 
+
 ### string 和 stringbuffer 和stringBuilder
 1. string由final修饰，不可修改。操作数量较少的字符串用String，不可修改的字符串；
 2. 在单线程且操作大量字符串用StringBuilder,速度快，但线程不安全，可修改；
@@ -21,6 +22,32 @@ char：16位，存储Unicode码，用单引号赋值。
 1. Array可以包含基本类型和对象类型，ArrayList只能包含对象类型。
 2. Array大小是固定的，ArrayList的大小是动态变化的。
 3. ArrayList提供了更多的方法和特性，比如：addAll()，removeAll()，iterator()等等。
+### Object 通用方法
+
+```java
+
+public native int hashCode()
+
+public boolean equals(Object obj)
+
+protected native Object clone() throws CloneNotSupportedException
+
+public String toString()
+
+public final native Class<?> getClass()
+
+protected void finalize() throws Throwable {}
+
+public final native void notify()
+
+public final native void notifyAll()
+
+public final native void wait(long timeout) throws InterruptedException
+
+public final void wait(long timeout, int nanos) throws InterruptedException
+
+public final void wait() throws InterruptedException
+```
 
 ### equals和==的区别
 对于复合数据类型之间进行equals比较，在没有覆写equals方法的情况下，他们之间的比较还是内存中的存放位置的地址值，跟双等号（==）的结果相同；如果被复写，按照复写的要求来。<br>
