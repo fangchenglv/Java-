@@ -18,6 +18,7 @@
 	equals 的作用:
 	引用类型：默认情况下，比较的是地址值，重写该方法后比较对象的成员变量值是否相同
 、、、
+
 	public static void main(String[] args) {
 	    Integer a = new Integer(3);
 	    Integer b = 3;                 
@@ -25,6 +26,7 @@
 	    System.out.println(a == b);    
 	    System.out.println(a == c);    
 	}
+	
 、、、
 	a == b分析
 	Integer b = 3; 自动调用Integer.valueOf(3) 返回一个Integer的对象。 这个对象是存放到cache中的。 而 Integer a = new Integer(3);这里创建了一个新的对象Integer
