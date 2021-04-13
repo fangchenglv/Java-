@@ -65,7 +65,7 @@ public final void wait() throws InterruptedException
  引用类型：比较的就是地址值是否相同   
 2. equals 的作用:  
 引用类型：默认情况下，比较的是地址值，重写该方法后比较对象的成员变量值是否相同  
-``` js
+```java
 public static void main(String[] args) {
 	Integer a = new Integer(3);
 	Integer b = 3;                 
@@ -226,7 +226,7 @@ CAS是英文单词CompareAndSwap的缩写，中文意思是：比较并替换。
 前面两种可以归结为一类：无返回值，原因很简单，通过重写run方法，run方式的返回值是void，所以没有办法返回结果。  
 后面两种可以归结成一类：有返回值，通过Callable接口，就要实现call方法，这个方法的返回值是Object，所以返回的结果可以放在Object对象中。  
 **第一种：继承Thread类，重写该类的run()方法。**  
-```
+```java
  1 class MyThread extends Thread {
  2     
  3     private int i = 0;
@@ -259,7 +259,7 @@ CAS是英文单词CompareAndSwap的缩写，中文意思是：比较并替换。
 **第二种：实现Runnable接口，并重写该接口的run()方法。**  
 
 创建Runnable实现类的实例，并以此实例作为Thread类的target来创建Thread对象，该Thread对象才是真正的线程对象。
-```
+```java
  1 class MyRunnable implements Runnable {
  2     private int i = 0;
  3 
