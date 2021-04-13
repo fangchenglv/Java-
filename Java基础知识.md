@@ -160,6 +160,81 @@ CAS是英文单词CompareAndSwap的缩写，中文意思是：比较并替换。
 5. AQS使用一个Volatile的int类型的成员变量来表示同步状态，通过内置的FIFO队列来完成资源获取的排队工作，通过CAS完成对State值的修改。
 6. AQS是通过一个CLH队列实现的（CLH锁即Craig, Landin, and Hagersten (CLH) locks，CLH锁是一个自旋锁，能确保无饥饿性，提供先来先服务的公平性。CLH锁也是一种基于链表的可扩展、高性能、公平的自旋锁，申请线程只在本地变量上自旋，它不断轮询前驱的状态，如果发现前驱释放了锁就结束自旋。）
 
+### Java多线程实现的四种方式：
+1. 继承Thread类，重写run方法
+2. 实现Runnable接口，重写run方法，实现Runnable接口的实现类的实例对象作为Thread构造函数的target
+3. 通过Callable和FutureTask创建线程
+4. 通过线程池创建线程
+前面两种可以归结为一类：无返回值，原因很简单，通过重写run方法，run方式的返回值是void，所以没有办法返回结果。  
+后面两种可以归结成一类：有返回值，通过Callable接口，就要实现call方法，这个方法的返回值是Object，所以返回的结果可以放在Object对象中。  
+**第一种：继承Thread类，重写该类的run()方法。**  
+```
+ 1 class MyThread extends Thread {
+ 2     
+ 3     private int i = 0;
+ 4 
+ 5     @Override
+ 6     public void run() {
+ 7         for (i = 0; i < 100; i++) {
+ 8             System.out.println(Thread.currentThread().getName() + " " + i);
+ 9         }
+10     }
+11 }
+
+ 1 public class ThreadTest {
+ 2 
+ 3     public static void main(String[] args) {
+ 4         for (int i = 0; i < 100; i++) {
+ 5             System.out.println(Thread.currentThread().getName() + " " + i);
+ 6             if (i == 30) {
+ 7                 Thread myThread1 = new MyThread();     // 创建一个新的线程  myThread1  此线程进入新建状态
+ 8                 Thread myThread2 = new MyThread();     // 创建一个新的线程 myThread2 此线程进入新建状态
+ 9                 myThread1.start();                     // 调用start()方法使得线程进入就绪状态
+10                 myThread2.start();                     // 调用start()方法使得线程进入就绪状态
+11             }
+12         }
+13     }
+14 }
+```
+如上所示，继承Thread类，通过重写run()方法定义了一个新的线程类MyThread，其中run()方法的方法体代表了线程需要完成的任务，称之为线程执行体。当创建此线程类对象时一个新的线程得以创建，并进入到线程新建状态。通过调用线程对象引用的start()方法，使得该线程进入到就绪状态，此时此线程并不一定会马上得以执行，这取决于CPU调度时机。
+	
+**第二种：实现Runnable接口，并重写该接口的run()方法。**
+
+创建Runnable实现类的实例，并以此实例作为Thread类的target来创建Thread对象，该Thread对象才是真正的线程对象。
+```
+ 1 class MyRunnable implements Runnable {
+ 2     private int i = 0;
+ 3 
+ 4     @Override
+ 5     public void run() {
+ 6         for (i = 0; i < 100; i++) {
+ 7             System.out.println(Thread.currentThread().getName() + " " + i);
+ 8         }
+ 9     }
+10 }
+
+ 1 public class ThreadTest {
+ 2 
+ 3     public static void main(String[] args) {
+ 4         for (int i = 0; i < 100; i++) {
+ 5             System.out.println(Thread.currentThread().getName() + " " + i);
+ 6             if (i == 30) {
+ 7                 Runnable myRunnable = new MyRunnable(); // 创建一个Runnable实现类的对象
+ 8                 Thread thread1 = new Thread(myRunnable); // 将myRunnable作为Thread target创建新的线程
+ 9                 Thread thread2 = new Thread(myRunnable);
+10                 thread1.start(); // 调用start()方法使得线程进入就绪状态
+11                 thread2.start();
+12             }
+13         }
+14     }
+15 }
+```
+**第三种：使用Callable和Future接口创建线程。**
+a:创建Callable接口的实现类 ，并实现Call方法 
+b:创建Callable实现类的实现，使用FutureTask类包装Callable对象，该FutureTask对象封装了Callable对象的Call方法的返回值  
+c:使用FutureTask对象作为Thread对象的target创建并启动线程  
+d:调用FutureTask对象的get()来获取子线程执行结束的返回值  
+
 ### 如何指定多个线程的执行顺序
 
 1. 设定一个 orderNum，每个线程执行结束之后，更新 orderNum，指明下一个要执行的线程。并且唤醒所有的等待线程。
