@@ -27,12 +27,10 @@ public static void main(String[] args) {
 }
 ```
 1. a == b分析
-
-Integer b = 3; 自动调用Integer.valueOf(3) 返回一个Integer的对象。 这个对象是存放到cache中的。 而 Integer a = new Integer(3);这里创建了一个新的对象Integer。所以 a == b 返回的是false
+	Integer b = 3; 自动调用Integer.valueOf(3) 返回一个Integer的对象。 这个对象是存放到cache中的。 而 Integer a = new Integer(3);这里创建了一个新的对象Integer。所以 a == b 返回的是false
 2. a == c 分析
- 
-一个Integer 与 int比较，先将Integer转换成int类型，再做值比较，所以返回的是true。
-java中还有与Integer类似的是Long，它也有一个缓存，在区间[-128,127]范围内获取缓存的值，而Long与long比较的时候先转换成long类型再做值的比较。Double类型，它没有缓存，但是当Double与double比较的时候会先转换成double类型，再做值的比较
+	一个Integer 与 int比较，先将Integer转换成int类型，再做值比较，所以返回的是true。
+	java中还有与Integer类似的是Long，它也有一个缓存，在区间[-128,127]范围内获取缓存的值，而Long与long比较的时候先转换成long类型再做值的比较。Double类型，它没有缓存，但是当Double与double比较的时候会先转换成double类型，再做值的比较
 
 ### HashMap和ConcurrentHashMap
 
