@@ -17,7 +17,7 @@
 引用类型：比较的就是地址值是否相同
 equals 的作用:
 引用类型：默认情况下，比较的是地址值，重写该方法后比较对象的成员变量值是否相同
-```
+``` js
 public static void main(String[] args) {
 	Integer a = new Integer(3);
 	Integer b = 3;                 
