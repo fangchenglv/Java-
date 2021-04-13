@@ -49,6 +49,15 @@ public final void wait(long timeout, int nanos) throws InterruptedException
 public final void wait() throws InterruptedException
 ```
 
+### 深拷贝和浅拷贝
+**1. 浅拷贝**  
+
+拷贝对象和原始对象的引用类型引用同一个对象。
+
+**2. 深拷贝**  
+
+拷贝对象和原始对象的引用类型引用不同对象。
+
 ### equals和==的区别
 对于复合数据类型之间进行equals比较，在没有覆写equals方法的情况下，他们之间的比较还是内存中的存放位置的地址值，跟双等号（==）的结果相同；如果被复写，按照复写的要求来。<br>
 1. == 的作用：  
@@ -397,6 +406,21 @@ HashSet的value存的是一个static finial PRESENT = newObject()。而HashSet�
 2. NIO：同步非阻塞，服务器实现模式为一个请求一个线程，即客户端发送的连接请求都会注册到多路复用器上，多路复用器轮询到连接有I/O请求时才启动一个线程进行处理。Channel、Selector、Buffer
 3. AIO：异步非阻塞，服务器实现模式为一个有效请求一个线程，客户端的 IO 请求都是由 OS 先完成了再通知服务器应用去启动线程进行处理
 
+### 选择器
+
+NIO 常常被叫做非阻塞 IO，主要是因为 NIO 在网络通信中的非阻塞特性被广泛使用。
+
+NIO 实现了 IO 多路复用中的 Reactor 模型，一个线程 Thread 使用一个选择器 Selector 通过轮询的方式去监听多个通道 Channel 上的事件，从而让一个线程就可以处理多个事件。
+
+通过配置监听的通道 Channel 为非阻塞，那么当 Channel 上的 IO 事件还未到达时，就不会进入阻塞状态一直等待，而是继续轮询其它 Channel，找到 IO 事件已经到达的 Channel 执行。
+
+因为创建和切换线程的开销很大，因此使用一个线程来处理多个事件而不是一个线程处理一个事件，对于 IO 密集型的应用具有很好地性能。
+
+应该注意的是，只有套接字 Channel 才能配置为非阻塞，而 FileChannel 不能，为 FileChannel 配置非阻塞也没有意义。
+
+<div align="center"> <img src="https://cs-notes-1256109796.cos.ap-guangzhou.myqcloud.com/093f9e57-429c-413a-83ee-c689ba596cef.png" width="350px"> </div><br>
+
+
 ### select、poll、epoll之间的区别
 select，poll，epoll都是IO多路复用的机制。I/O多路复用就通过一种机制，可以监视多个描述符，一旦某个描述符就绪（一般是读就绪或者写就绪），能够通知程序进行相应的读写操作。但select，poll，epoll本质上都是同步I/O，因为他们都需要在读写事件就绪后自己负责进行读写，也就是说这个读写过程是阻塞的，而异步I/O则无需自己负责进行读写，异步I/O的实现会负责把数据从内核拷贝到用户空间。
 1. select==>时间复杂度O(n)
@@ -408,6 +432,15 @@ epoll可以理解为event poll，不同于忙轮询和无差别轮询，epoll会
 
 ### java异常
 ![image](https://user-images.githubusercontent.com/30047055/114562369-086d9880-9ca1-11eb-8b15-9699baeb5414.png)
+
+### Java 的 I/O 大概可以分成以下几类：
+
+- 磁盘操作：File
+- 字节操作：InputStream 和 OutputStream
+- 字符操作：Reader 和 Writer
+- 对象操作：Serializable
+- 网络操作：Socket
+- 新的输入/输出：NIO
 
 ### 字符流与字节流的区别
 1. 字节流在操作时本身不会用到缓冲区（内存），是文件本身直接操作的，而字符流在操作时使用了缓冲区，通过缓冲区再操作文件
@@ -429,6 +462,16 @@ epoll可以理解为event poll，不同于忙轮询和无差别轮询，epoll会
 2)为了解决对象流读写操作时可能引发的问题(如果不进行序列化,可能会存在数据乱序的问题)
 	
 3）序列化除了能够实现对象的持久化之外，还能够用于对象的深度克隆
+
+### transient
+
+transient 关键字可以使一些属性不会被序列化。
+
+ArrayList 中存储数据的数组 elementData 是用 transient 修饰的，因为这个数组是动态扩展的，并不是所有的空间都被使用，因此就不需要所有的内容都被序列化。通过重写序列化和反序列化方法，使得可以只序列化数组中有内容的那部分数据。
+
+```java
+private transient Object[] elementData;
+```
 
 ### Java SPI
 
