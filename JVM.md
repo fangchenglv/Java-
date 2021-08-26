@@ -3,7 +3,7 @@
 
 
 
-简单说说你了解的类加载器，可以打破双亲委派么，怎么打破。
+# 简单说说你了解的类加载器，可以打破双亲委派么，怎么打破。
     1) 什么是类加载器？
 	类加载器 就是根据指定全限定名称将.class文件加载到JVM内存，并对数据进行校验，解析和初始化，最终形成可以被虚拟机直接使用的java类型。
 	1、启动类加载器（Bootstrap ClassLoader）
@@ -18,7 +18,7 @@
     4）怎么打破双亲委派模型？
 	打破双亲委派机制则不仅要继承ClassLoader类，还要重写loadClass和findClass方法。
 
-ClassLoader的重要方法
+# ClassLoader的重要方法
 	Class loadClass(String name) ：name参数指定类装载器需要装载类的名字，必须使用全限定类名。
 	Class defineClass(String name,byte[] b,int len)：将类文件的字节数组转换成JVM内部的java.lang.Class对象。字节数组可以从本地文件系统、远程网络获取。参数name为字节数组对应的全限定类名。
 	Class findSystemClass(String name)：从本地文件系统在来Class文件。如果本地系统不存在该Class文件。则抛出ClassNotFoundException异常。该方法是JVM默认使用的装载机制
@@ -28,7 +28,7 @@ ClassLoader的重要方法
 	ExtClassLoader的父装载器是根装载器，因为根装载器非java语言编写，所以无法获取，将返回null。
 
 
-详解JVM内存结构
+# 详解JVM内存结构
 	程序计数器：当前线程所执行的字节码的行号指示器，用于记录正在执行的虚拟机字节指令地址，线程私有。该内存区域是唯一一个java虚拟机规范没有规定任何OOM情况的区域。
 	Java虚拟栈：
 	    1. 虚拟机栈也就是我们平常所称的栈内存,它为java方法服务，每个方法在执行的时候都会创建一个栈帧，用于存储局部变量表、操作数栈、动态链接和方法出口等信息。
@@ -53,8 +53,8 @@ ClassLoader的重要方法
 	
 
 
-JVM内存为什么要分成新生代，老年代，持久代。新生代中为什么要分为Eden和Survivor。
-	垃圾的分代回收
+# JVM内存为什么要分成新生代，老年代，持久代。新生代中为什么要分为Eden和Survivor。#
+	## 垃圾的分代回收
 	1）共享内存区划分
 	    共享内存区 = 持久代 + 堆
 	    持久代 = 方法区 + 其他
