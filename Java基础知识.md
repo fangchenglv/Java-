@@ -473,6 +473,6 @@ ArrayList 中存储数据的数组 elementData 是用 transient 修饰的，因�
 private transient Object[] elementData;
 ```
 
-### Java SPI
+### Java SPI 
 
 由于双亲委派模型损失了一丢丢灵活性。就比如java.sql.Driver这个东西。JDK只能提供一个规范接口，而不能提供实现。提供实现的是实际的数据库提供商。提供商的库总不能放JDK目录里吧。Java从1.6搞出了SPI就是为了优雅的解决这类问题——JDK提供接口，供应商提供服务。编程人员编码时面向接口编程，然后JDK能够自动找到合适的实现。
