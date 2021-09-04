@@ -1,4 +1,4 @@
-![image](https://github.com/fangchenglv/Java-Interview/raw/main/pic/%E6%8E%92%E5%BA%8F%E6%AF%94%E8%BE%83.jpg)
+![image](pic/排序比较.jpg)
 #
 # Java基本数据类型总结
 ### &emsp;&emsp;byte：8位，最大存储数据量是255，存放的数据范围是-128~127之间。  
@@ -112,6 +112,8 @@ https://blog.csdn.net/swpu_ocean/article/details/88917958
 https://blog.csdn.net/qq_43568704/article/details/108406763
 ### &emsp;&emsp;在JDK1.7版本中，ConcurrentHashMap维护了一个Segment数组，Segment这个类继承了重入锁ReentrantLock，并且该类里面维护了一个 HashEntry<K,V>[] table数组，在写操作put，remove，扩容的时候，会对Segment加锁，所以仅仅影响这个Segment，不同的Segment还是可以并发的，所以解决了线程的安全问题，同时又采用了分段锁也提升了并发的效率。
 ### &emsp;&emsp;在JDK1.8版本中，ConcurrentHashMap摒弃了Segment的概念，而是直接用Node数组+链表+红黑树的数据结构来实现，并发控制使用Synchronized和CAS来操作，整个看起来就像是优化过且线程安全的HashMap。（（分段锁、乐观锁CAS、violate关键字）
+
+![image](pic/java集合框架.png)
 ---
 ## Hashtable与 HashMap
 ---
@@ -126,6 +128,7 @@ https://blog.csdn.net/qq_43568704/article/details/108406763
 ### &emsp;&emsp;TreeMap实现SortMap接口，能够把它保存的记录根据键排序,默认是按键值的升序排序，也可以指定排序的比较器，当用Iterator 遍历TreeMap时，得到的记录是排过序的。按key排序、红黑树、key必须是同一个类创建的对象!
 #
 # 红黑树
+![image](pic/红黑树.jpeg)
 11
 
 #
