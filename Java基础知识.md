@@ -1,4 +1,4 @@
-![iamge](https://github.com/fangchenglv/Java-Interview/raw/main/pic/%E6%8E%92%E5%BA%8F%E6%AF%94%E8%BE%83.jpg)
+![image](https://github.com/fangchenglv/Java-Interview/raw/main/pic/%E6%8E%92%E5%BA%8F%E6%AF%94%E8%BE%83.jpg)
 #
 # Java基本数据类型总结
 ### &emsp;&emsp;byte：8位，最大存储数据量是255，存放的数据范围是-128~127之间。  
